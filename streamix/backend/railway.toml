@@ -1,0 +1,19 @@
+# railway.toml — Backend deployment config for Railway.app (free tier)
+# Docs: https://docs.railway.app/reference/config-as-code
+
+[build]
+builder = "DOCKERFILE"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "node server.js"
+healthcheckPath = "/health"
+healthcheckTimeout = 90   # Extra time for initial M3U fetch
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 3
+
+# Environment variables — set these in Railway dashboard:
+# TMDB_API_KEY    = your TMDB API key (free at themoviedb.org)
+# ADMIN_TOKEN     = random secret for admin endpoints
+# FRONTEND_URL    = your Vercel frontend URL (for CORS)
+# NODE_ENV        = production

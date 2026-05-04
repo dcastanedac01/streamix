@@ -1,0 +1,99 @@
+/* Streamix — Netflix-inspired Dark Theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+
+:root {
+  --bg-primary:    #0a0a0f;
+  --bg-secondary:  #141420;
+  --bg-card:       #1a1a2e;
+  --bg-hover:      #22223a;
+  --red:           #e50914;
+  --red-dark:      #b20710;
+  --red-glow:      rgba(229, 9, 20, 0.3);
+  --text-primary:  #ffffff;
+  --text-secondary: #b3b3cc;
+  --text-muted:    #6b6b85;
+  --border:        rgba(255, 255, 255, 0.08);
+  --border-hover:  rgba(255, 255, 255, 0.18);
+  --gradient-top:  linear-gradient(to bottom, rgba(10,10,15,0.9) 0%, transparent 40%);
+  --gradient-bottom: linear-gradient(to top, rgba(10,10,15,1) 30%, transparent 70%);
+  --radius-sm:     6px;
+  --radius-md:     10px;
+  --radius-lg:     16px;
+  --font: 'Barlow', -apple-system, BlinkMacSystemFont, sans-serif;
+  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --nav-h: 68px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: inherit; }
+img { display: block; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.4); }
+
+/* ── Utilities ── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); border: 0;
+}
+
+/* ── Spinner ── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ── Badge ── */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.05em;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.badge-4k   { background: linear-gradient(135deg,#f59e0b,#ef4444); color:#fff; }
+.badge-hd   { background: rgba(59,130,246,0.3); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); }
+.badge-live { background: var(--red); color: #fff; }
+.badge-es   { background: rgba(34,197,94,0.2); color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
+
+/* ── Quality dot indicator ── */
+.quality-dot {
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; margin-right: 4px;
+}
+.quality-dot.live { background: var(--red); box-shadow: 0 0 6px var(--red); animation: pulse-dot 1.5s infinite; }
+@keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.5} }
+
+/* ── Page loading ── */
+.page-loading {
+  display: flex; align-items: center; justify-content: center;
+  height: 100vh;
+  flex-direction: column; gap: 20px;
+}
+.page-loading p { color: var(--text-muted); font-size: 14px; }

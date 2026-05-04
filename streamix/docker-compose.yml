@@ -1,0 +1,56 @@
+version: '3.9'
+
+# ─────────────────────────────────────────────────────────────────
+# Streamix — Docker Compose
+# Levanta backend + frontend en local con un solo comando:
+#   docker-compose up
+#
+# Para producción usa Railway (backend) + Vercel (frontend)
+# ─────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── Backend API ─────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: streamix-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      - TMDB_API_KEY=${TMDB_API_KEY:-}
+      - ADMIN_TOKEN=${ADMIN_TOKEN:-changeme-in-production}
+      - FRONTEND_URL=http://localhost:5173
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      start_period: 90s   # Give time to fetch M3U on startup
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - streamix
+
+  # ── Frontend (built + served by nginx) ─────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+    container_name: streamix-frontend
+    ports:
+      - "80:80"
+    environment:
+      - VITE_API_URL=http://backend:3001
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - streamix
+
+networks:
+  streamix:
+    driver: bridge
