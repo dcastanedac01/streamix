@@ -9,7 +9,7 @@ WORKDIR /app
 # Install dependencies in a separate stage for layer caching
 FROM base AS deps
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --omit=dev
 
 # Final image
 FROM base AS runner
