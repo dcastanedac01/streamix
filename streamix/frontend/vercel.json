@@ -22,6 +22,6 @@
     }
   ],
   "env": {
-    "VITE_API_URL": "@streamix-api-url"
+    "VITE_API_URL": "https://streamix-production-c957.up.railway.app"
   }
 }
