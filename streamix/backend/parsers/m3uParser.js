@@ -14,24 +14,14 @@ const gunzip = promisify(zlib.gunzip);
 // https://github.com/iptv-org/iptv
 // ─────────────────────────────────────────────────────────────────
 const FREE_SOURCES = {
+ const FREE_SOURCES = {
   live: [
-    // All channels index
-    { url: 'https://iptv-org.github.io/iptv/index.m3u', label: 'All Live' },
-    // Mexico
     { url: 'https://iptv-org.github.io/iptv/countries/mx.m3u', label: 'México' },
-    // USA (English + Spanish)
-    { url: 'https://iptv-org.github.io/iptv/countries/us.m3u', label: 'USA' },
-    // Spain
     { url: 'https://iptv-org.github.io/iptv/countries/es.m3u', label: 'España' },
-    // Latin America
-    { url: 'https://iptv-org.github.io/iptv/countries/ar.m3u', label: 'Argentina' },
-    { url: 'https://iptv-org.github.io/iptv/countries/co.m3u', label: 'Colombia' },
-    // News category
-    { url: 'https://iptv-org.github.io/iptv/categories/news.m3u', label: 'News' },
-    // Sports
-    { url: 'https://iptv-org.github.io/iptv/categories/sports.m3u', label: 'Sports' },
-    // Entertainment
-    { url: 'https://iptv-org.github.io/iptv/categories/entertainment.m3u', label: 'Entertainment' },
+    { url: 'https://iptv-org.github.io/iptv/countries/us.m3u', label: 'USA' },
+    { url: 'https://iptv-org.github.io/iptv/categories/sports.m3u', label: 'Deportes' },
+    { url: 'https://iptv-org.github.io/iptv/categories/news.m3u', label: 'Noticias' },
+    { url: 'https://iptv-org.github.io/iptv/categories/entertainment.m3u', label: 'Entretenimiento' },
   ],
   movies: [
     { url: 'https://iptv-org.github.io/iptv/categories/movies.m3u', label: 'Movies' },
@@ -40,7 +30,6 @@ const FREE_SOURCES = {
     { url: 'https://iptv-org.github.io/iptv/categories/series.m3u', label: 'Series' },
   ],
 };
-
 // Free EPG Sources — iptv-org/epg (completely free)
 // https://github.com/iptv-org/epg
 const FREE_EPG_SOURCES = [
