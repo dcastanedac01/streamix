@@ -3,15 +3,14 @@
  * Centralized API calls with local cache + retry logic
  */
 
-const BASE = import.meta.env.VITE_API_URL || '';
+const BASE = 'https://streamix-production-c957.up.railway.app';
 const memCache = new Map();
 
 async function apiFetch(path, opts = {}) {
   const url = `${BASE}${path}`;
   const cacheKey = url;
-  const ttl = opts.ttl || 60000; // default 1 min
+  const ttl = opts.ttl || 60000;
 
-  // Check in-memory cache
   const cached = memCache.get(cacheKey);
   if (cached && Date.now() - cached.ts < ttl) return cached.data;
 
@@ -25,14 +24,13 @@ async function apiFetch(path, opts = {}) {
     memCache.set(cacheKey, { data, ts: Date.now() });
     return data;
   } catch (err) {
-    // Return cached data on error (stale-while-revalidate)
     if (cached) return cached.data;
     throw err;
   }
 }
 
 export const api = {
-  home:       ()           => apiFetch('/api/home', { ttl: 120000 }),
+  home:       ()            => apiFetch('/api/home', { ttl: 120000 }),
   live:       (params = {}) => apiFetch(`/api/live?${new URLSearchParams(params)}`, { ttl: 60000 }),
   movies:     (params = {}) => apiFetch(`/api/movies?${new URLSearchParams(params)}`, { ttl: 120000 }),
   series:     (params = {}) => apiFetch(`/api/series?${new URLSearchParams(params)}`, { ttl: 120000 }),
