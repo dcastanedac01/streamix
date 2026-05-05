@@ -16,21 +16,48 @@ const gunzip = promisify(zlib.gunzip);
 const FREE_SOURCES = {
  const FREE_SOURCES = {
   live: [
+    // ── MÉXICO ──────────────────────────────────────────
     { url: 'https://iptv-org.github.io/iptv/countries/mx.m3u', label: 'México' },
+    
+    // ── LATINOAMÉRICA ────────────────────────────────────
+    { url: 'https://iptv-org.github.io/iptv/countries/ar.m3u', label: 'Argentina' },
+    { url: 'https://iptv-org.github.io/iptv/countries/co.m3u', label: 'Colombia' },
+    { url: 'https://iptv-org.github.io/iptv/countries/cl.m3u', label: 'Chile' },
+    { url: 'https://iptv-org.github.io/iptv/countries/ve.m3u', label: 'Venezuela' },
+    { url: 'https://iptv-org.github.io/iptv/countries/pe.m3u', label: 'Perú' },
     { url: 'https://iptv-org.github.io/iptv/countries/es.m3u', label: 'España' },
-    { url: 'https://iptv-org.github.io/iptv/countries/us.m3u', label: 'USA' },
-    { url: 'https://iptv-org.github.io/iptv/categories/sports.m3u', label: 'Deportes' },
+
+    // ── NOTICIAS ─────────────────────────────────────────
     { url: 'https://iptv-org.github.io/iptv/categories/news.m3u', label: 'Noticias' },
+
+    // ── DEPORTES ─────────────────────────────────────────
+    { url: 'https://iptv-org.github.io/iptv/categories/sports.m3u', label: 'Deportes' },
+
+    // ── ENTRETENIMIENTO ───────────────────────────────────
     { url: 'https://iptv-org.github.io/iptv/categories/entertainment.m3u', label: 'Entretenimiento' },
+
+    // ── REPOSITORIOS ALTERNATIVOS CON MÁS CANALES ────────
+    // Incluye Fox Sports, ESPN, Sky, Discovery en español
+    { url: 'https://raw.githubusercontent.com/craftypenguins/m3u-channels/master/channels.m3u', label: 'Crafty' },
+    { url: 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8', label: 'FreeTV' },
+    { url: 'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/mx.m3u', label: 'MX Streams' },
+    { url: 'https://raw.githubusercontent.com/iptv-org/iptv/master/streams/us.m3u', label: 'US Streams' },
+
+    // ── DEPORTES PREMIUM (funciona según región) ──────────
+    { url: 'https://iptv-org.github.io/iptv/languages/spa.m3u', label: 'Todo en Español' },
   ],
+
   movies: [
     { url: 'https://iptv-org.github.io/iptv/categories/movies.m3u', label: 'Movies' },
+    // Películas en español
+    { url: 'https://raw.githubusercontent.com/Free-TV/IPTV/master/playlist.m3u8', label: 'FreeTV Movies' },
   ],
+
   series: [
     { url: 'https://iptv-org.github.io/iptv/categories/series.m3u', label: 'Series' },
+    { url: 'https://iptv-org.github.io/iptv/categories/animation.m3u', label: 'Animación' },
   ],
-};
-// Free EPG Sources — iptv-org/epg (completely free)
+};// Free EPG Sources — iptv-org/epg (completely free)
 // https://github.com/iptv-org/epg
 const FREE_EPG_SOURCES = [
   'https://iptv-org.github.io/epg/guides/mx/tvlistings.google.com.epg.xml.gz',
